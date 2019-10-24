@@ -1,0 +1,25 @@
+{
+  "name": "factory",
+  "version": "1.0.0",
+  "description": "Треннировки по js",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lifeFedorovAlexey/factory.git"
+  },
+  "author": "life",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lifeFedorovAlexey/factory/issues"
+  },
+  "homepage": "https://github.com/lifeFedorovAlexey/factory#readme",
+  "devDependencies": {
+    "mocha": "^6.2.2"
+  }
+}
