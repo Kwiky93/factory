@@ -1,10 +1,12 @@
 var assert = require("assert");
+var expect = require("chai").expect;
+const App = require("../controllers/app");
 
-describe("Проверка чего либо", function() {
-  it("Test #1", function(done) {
+describe("App", function() {
+  it("#run()", done => {
     let err = false;
     if (err) {
-      assert(false, err.message);
+      assert(err);
       return;
     }
     done();
