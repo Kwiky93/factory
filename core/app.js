@@ -1,5 +1,5 @@
-const db = require("../services/dbService");
-const api = require("../services/apiService");
+const db = require("./services/dbService");
+const api = require("./services/apiService");
 module.exports = class App {
   constructor(params) {
     this.params = params;

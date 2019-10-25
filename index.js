@@ -1,4 +1,4 @@
-const App = require("./controllers/app");
+const App = require("./core/app.js");
 
 function run() {
   App.run();
