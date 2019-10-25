@@ -1,7 +1,8 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 const utils = require("./utils");
-const HOST = "mongodb://localhost/";
-const DB_NAME = "factory";
+const HOST = process.env.DB_HOST;
+const DB_NAME = process.env.DB_NAME;
 
 mongoose.Promise = global.Promise;
 mongoose.connect(HOST + DB_NAME, {

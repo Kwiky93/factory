@@ -1,8 +1,9 @@
 const express = require("express");
 const utils = require("./utils");
 const app = express();
-const HOST_FRONT = "http://localhost:8080";
-const SERVER_PORT = 8080;
+require("dotenv").config();
+const HOST_FRONT = process.env.HOST_FRONT;
+const SERVER_PORT = process.env.SERVER_PORT;
 
 const bodyParser = require("body-parser");
 
