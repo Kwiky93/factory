@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const utils = require("./utils");
 const HOST = "mongodb://localhost/";
 const DB_NAME = "factory";
 
@@ -13,7 +14,7 @@ const db = mongoose.connection;
 
 module.exports = class ServiceDB {
   static connect() {
-    db.once("open", () => console.log("Connected to " + HOST + DB_NAME));
-    db.on("error", error => console.log("Error : " + error));
+    db.once("open", () => utils.log("DB доступна, " + HOST + DB_NAME));
+    db.on("error", error => utils.log("Ошибка : " + error));
   }
 };

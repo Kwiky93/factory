@@ -1,4 +1,5 @@
 const express = require("express");
+const utils = require("./utils");
 const app = express();
 const HOST_FRONT = "http://localhost:8080";
 const SERVER_PORT = 8080;
@@ -21,7 +22,7 @@ module.exports = class ServiceDB {
     await require("../api")(app);
 
     await app.listen(SERVER_PORT, () => {
-      console.log("API Запущен, порт: " + SERVER_PORT);
+      utils.log("API запущен, порт: " + SERVER_PORT);
     });
   }
 };
