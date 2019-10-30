@@ -1,2 +1,7 @@
 # factory
-Треннировки по js
+
+## Project setup
+
+```
+npm install
+```

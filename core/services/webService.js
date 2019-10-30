@@ -1,27 +1,28 @@
 const utils = require("./utils");
 require("dotenv").config();
 
-const http = require("http");
-const fs = require("fs");
 const httpPort = process.env.WEB_SERVER_PORT;
+const filePath = "./dist";
+require("dotenv").config();
+
+let express = require("express");
+let app = express();
+let history = require("connect-history-api-fallback");
 
 module.exports = class WebService {
   static async start() {
-    http
-      .createServer((req, res) => {
-        fs.readFile("./dist/index.html", "utf-8", (err, content) => {
-          if (err) {
-            utils.log(err);
-          }
-
-          res.writeHead(200, {
-            "Content-Type": "text/html; charset=utf-8"
-          });
-          res.end(content);
-        });
+    app.use(
+      history({
+        // verbose: true
       })
-      .listen(httpPort, () => {
-        utils.log("WEB запущен, порт: " + httpPort);
-      });
+    );
+
+    app.use(express.static(filePath));
+
+    app.set("port", httpPort);
+
+    app.listen(app.get("port"), () => {
+      utils.log("WEB запущен, порт: " + httpPort);
+    });
   }
 };
