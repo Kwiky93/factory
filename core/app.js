@@ -1,5 +1,6 @@
 const db = require("./services/dbService");
 const api = require("./services/apiService");
+const web = require("./services/webService");
 module.exports = class App {
   constructor(params) {
     this.params = params;
@@ -8,6 +9,7 @@ module.exports = class App {
   static async run() {
     db.connect();
     api.start();
+    web.start();
   }
   getParams() {
     return this.params;

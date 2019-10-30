@@ -13,7 +13,7 @@ mongoose.connect(HOST + DB_NAME, {
 
 const db = mongoose.connection;
 
-module.exports = class ServiceDB {
+module.exports = class DBService {
   static connect() {
     db.once("open", () => utils.log("DB доступна, " + HOST + DB_NAME));
     db.on("error", error => utils.log("Ошибка : " + error));
