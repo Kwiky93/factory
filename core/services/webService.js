@@ -1,16 +1,39 @@
-const utils = require("./utils");
 require("dotenv").config();
+const utils = require("./utils");
+let express = require("express");
+const history = require("connect-history-api-fallback");
+let WebSocket = new require("ws");
 
 const httpPort = process.env.WEB_SERVER_PORT;
+const WSPort = process.env.WS_PORT;
 const filePath = "./dist";
-require("dotenv").config();
 
-let express = require("express");
+let clients = {};
 let app = express();
-let history = require("connect-history-api-fallback");
+
+let wss = new WebSocket.Server({ port: WSPort });
 
 module.exports = class WebService {
   static async start() {
+    wss.on("connection", function(ws) {
+      let id = Math.random();
+      clients[id] = ws;
+      utils.log("новое соединение " + id);
+
+      ws.on("message", function(message) {
+        utils.log("получено сообщение " + message);
+
+        for (let key in clients) {
+          clients[key].send(message);
+        }
+      });
+
+      ws.on("close", function() {
+        utils.log("соединение закрыто " + id);
+        delete clients[id];
+      });
+    });
+
     app.use(
       history({
         // verbose: true
