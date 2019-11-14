@@ -19,20 +19,19 @@ export default {
     return {
       msg: "",
       message: "",
-      messages: [],
-      socket: new WebSocket("ws://localhost:8080")
+      messages: []
     };
   },
   created() {
     this.getJson();
     let self = this;
-    this.socket.onmessage = function(event) {
+    this.$webSocet.onmessage = function(event) {
       self.messages.push(event.data);
     };
   },
   methods: {
     send: async function() {
-      this.socket.send(this.message);
+      this.$webSocet.send(this.message);
     },
     showMessage: async function(message) {},
     getJson: async function() {
