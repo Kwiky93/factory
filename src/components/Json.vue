@@ -1,22 +1,39 @@
 <template>
   <div class="json">
     <h1>{{ msg }}</h1>
+    <input type="text" name="message" v-model="message" />
+    <input type="button" value="Отправить" v-on:click="send" />
+    <div id="subscribe">
+      <ol>
+        <li v-for="message in messages" :key="message.id">{{ message }}</li>
+      </ol>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "json",
-  created() {
-    this.getJson();
-  },
   props: {},
   data() {
     return {
-      msg: ""
+      msg: "",
+      message: "",
+      messages: []
+    };
+  },
+  created() {
+    this.getJson();
+    let self = this;
+    this.$webSocet.onmessage = function(event) {
+      self.messages.push(event.data);
     };
   },
   methods: {
+    send: async function() {
+      this.$webSocet.send(this.message);
+    },
+    showMessage: async function(message) {},
     getJson: async function() {
       let result = await this.$axios
         .get("get/json")
